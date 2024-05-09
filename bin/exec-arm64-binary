@@ -1,0 +1,17 @@
+#!/usr/bin/env zsh
+set -e
+
+# needs `brew install coreutils`
+absolute_path=$(realpath "$1")
+
+directory=$(dirname "$absolute_path")
+filename=$(basename "$absolute_path")
+
+docker run									\
+	-v "$directory":/passthrough			\
+	-v /Users/Sam/Development/cross-compilers/aarch64-unknown-linux-gnu/aarch64-unknown-linux-gnu/sysroot/usr/lib:/passthrough-usr-local-lib 	\
+	-v /Users/Sam/Development/cross-compilers/aarch64-unknown-linux-gnu/aarch64-unknown-linux-gnu/sysroot/lib:/passthrough-usr-lib 			\
+	-w /passthrough 						\
+	qemudocker 								\
+	"$filename"
+

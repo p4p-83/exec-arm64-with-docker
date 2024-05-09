@@ -1,0 +1,10 @@
+#!/bin/bash
+
+# bring through binaries
+cp -r /passthrough-usr-local-lib/* /usr/local/lib
+cp -r /passthrough-usr-lib/* /usr/lib
+
+# run it
+# export LD_DEBUG=files
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib:/usr/lib
+/passthrough/$1
